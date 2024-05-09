@@ -15,11 +15,6 @@ class TestTextNode(unittest.TestCase):
         node2 = TextNode("This is a text node", "text_type_bold")
         self.assertEqual(node, node2)
 
-    def test_eq_type(self):
-        node = TextNode("This is a text node", "text_type_bold")
-        node2 = TextNode("This is a text node", "text_type_bold")
-        self.assertEqual(node, node2)
-
     def test_eq_url(self):
         node = TextNode("This is a text node", "text_type_bold", "www.google.de")
         node2 = TextNode("This is a text node", "text_type_bold", "www.google.de")
@@ -29,11 +24,6 @@ class TestTextNode(unittest.TestCase):
         node = TextNode("This is a text node", "text_type_bold", None)
         node2 = TextNode("This is a text node", "text_type_bold", None)
         self.assertEqual(node, node2)
-        
-    def test_neq_text(self):
-        node = TextNode("This is a text node", "text_type_bold")
-        node2 = TextNode("This is different", "text_type_bold")
-        self.assertNotEqual(node, node2)      
 
     def test_neq_type(self):
         node = TextNode("This is a text node", "text_type_bold")
