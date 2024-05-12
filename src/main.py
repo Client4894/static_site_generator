@@ -7,8 +7,14 @@ def main():
     # print(test)
 
     node = TextNode(
-        "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png)",
+        "This is text with an ![image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/zjjcJKZ.png) and another ![second image](https://storage.googleapis.com/qvault-webapp-dynamic-assets/course_assets/3elNhQu.png) or rather ![image](www.google.de)",
         "text",
     )
     print(split_nodes_image([node]))
+
+    link_node = TextNode(
+        "This is text with a [url](https://testshit.de) and another [second link](https://diesmalkürzer.de) or rather [third link](www.google.de)",
+        "text",
+    )
+    print(split_nodes_link([link_node]))
 main()

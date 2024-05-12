@@ -44,11 +44,27 @@ def split_nodes_image(old_nodes):
             new_nodes.append(old_node)
             continue
         images_tups = extract_markdown_images(old_node.text)
-        print(old_node.text)
+        current = old_node.text
         for tup in images_tups:
-            # print(old_node.text.split(f"![{tup[0]}]({tup[1]})"))
-            new_nodes.append(old_node.text.split(f"![{tup[0]}]({tup[1]})"))
+            pos = current.find(f"![{tup[0]}]")
+            tup_text = current[:pos]
+            new_nodes.append(TextNode(tup_text, text_type_text))
+            new_nodes.append(TextNode(tup[0], text_type_image, tup[1]))
+            current = current[pos + 5 + len(tup[0]) + len(tup[1]):]
     return new_nodes
 
 def split_nodes_link(old_nodes):
-    return old_nodes
+    new_nodes = []
+    for old_node in old_nodes:
+        if old_node.text_type != text_type_text:
+            new_nodes.append(old_node)
+            continue
+        links_tups = extract_markdown_links(old_node.text)
+        current = old_node.text
+        for tup in links_tups:
+            pos = current.find(f"[{tup[0]}]")
+            tup_text = current[:pos]
+            new_nodes.append(TextNode(tup_text, text_type_text))
+            new_nodes.append(TextNode(tup[0], text_type_link, tup[1]))
+            current = current[pos + 4 + len(tup[0]) + len(tup[1]):]
+    return new_nodes
